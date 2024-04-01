@@ -47,7 +47,7 @@ system:
 
   renderer_type: "nvdiff-rasterizer"
   renderer:
-    context_type: gl
+    context_type: cuda
 
   prompt_processor_type: "stable-diffusion-prompt-processor"
   prompt_processor:
