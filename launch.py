@@ -132,6 +132,23 @@ def main(args, extras) -> None:
 
         install_import_hook("threestudio", "typeguard.typechecked")
 
+    from openai import OpenAI
+    client=OpenAI(
+        api_key="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"
+    )
+    response=client.chat.completions.create(
+        model="gpt-3.5-turbo-0125",
+        messages=[
+            {"role": "system", "content": "You are a helpful assistant. You follow the output structure strictly"},
+            {"role": "user", "content": "A nobleman standing in front of his castle while two owls on a big oak at night"},
+            {"role": "assistant", "content": r"Region 0: A bright moon, full and radiant, casting a silver glow over a tranquil lake, serene and majestic in the night sky.\nRegion 1: Two owls, perched side by side, wise and mysterious, with piercing eyes, on an ancient, gnarled branch under the starlit sky.\nRegion 2: A nobleman, regal and distinguished, with a sharp gaze, dressed in a velvet doublet, standing proudly in his ancestral castle.\nRegion 3: A big oak, towering and robust, its sprawling branches a testament to centuries, leaves whispering stories in the gentle breeze."},
+            {"role": "user", "content": "A man and his dog is looking at a parrot on the tree"},
+            {"role": "assistant", "content": r"Region 0: A contemplative man stands beside his loyal dog, both gazing upward with a sense of wonder, the bond between them palpable and heartwarming.\nRegion 1: A robust tree stands tall, its branches a cradle for wildlife, leaves whispering stories of the forest, a symbol of life and growth.\nRegion 2: A vibrant parrot perches alertly, its feather is smooth like blue silk, its sharp eyes scanning the world from its lofty vantage point"},
+            {"role": "user", "content": "A ceramic teacup with a hand-painted floral design"}
+        ]
+    )
+    print(response.choices[0].message.content)
+    
     import threestudio
     from threestudio.systems.base import BaseSystem
     from threestudio.utils.callbacks import (
